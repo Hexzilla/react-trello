@@ -10,9 +10,18 @@
     "README"
   ],
   "scripts": {
+    "lint": "eslint components/** tests/**",
+    "lintfix": "eslint --fix components/** tests/**",
+    "prepublish": "npm run lint && npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "storybook": "start-storybook -p 9002",
     "test": "mocha --require tests/config/setup 'tests/**/*.test.js'",
+    "test:watch": "mocha --require tests/config/setup 'tests/**/*.test.js' --watch",
+    "test:cover": "istanbul cover -x *.test.js _mocha -- -R spec --require tests/config/setup 'tests/**/*.test.js'",
+    "test:report": "cat ./coverage/lcov.info | codecov && rm -rf ./coverage",
     "build": "babel components --out-dir dist",
-    "docs": "build-storybook -o docs"
+    "docs": "build-storybook -o docs",
+    "commit": "git cz"
   },
   "repository": {
     "type": "git",
