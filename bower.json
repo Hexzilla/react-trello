@@ -1,0 +1,21 @@
+{
+  "name": "trello-clone",
+  "description": "",
+  "main": "dist/index.js",
+  "authors": [
+    "reactomoss"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "trello",
+    "board"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
