@@ -33,7 +33,7 @@
     "trello",
     "board"
   ],
-  "author": "RC, Prakash",
+  "author": "reactomoss",
   "license": "MIT",
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "^3.3.0",
