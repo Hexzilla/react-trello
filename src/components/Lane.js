@@ -27,22 +27,22 @@ class Lane extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({cards: nextProps.cards})
+  sortCards (cards, sortFunction) {
+    if (!cards) return []
+    if (!sortFunction) return cards
+    return cards.concat().sort(function (card1, card2) {
+      return sortFunction(card1, card2)
+    })
   }
 
   laneDidMount = (node) => {
     if (node) {
       node.addEventListener('scroll', this.handleScroll)
     }
-  };
+  }
 
-  sortedCards (cards, sortFunction) {
-    if (!cards) return []
-    if (!sortFunction) return cards
-    return cards.sort(function (card1, card2) {
-      return sortFunction(card1, card2)
-    })
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.cards.map(c => c.id) !== this.props.cards.map(c => c.id) || nextState !== this.state
   }
 
   render () {
@@ -54,7 +54,7 @@ class Lane extends Component {
         <RightContent>{label}</RightContent>
       </Header>
       <DraggableList className='drag-inner-list' data-id={id}>
-        {this.sortedCards(cards, laneSortFunction).map((card) => (
+        {this.sortCards(cards, laneSortFunction).map((card) => (
           <Card id={card.id}
             key={card.id}
             title={card.title}
