@@ -4,5 +4,5 @@
     "stage-0",
     "react"
   ],
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": ["transform-object-rest-spread", "transform-runtime"]
 }
