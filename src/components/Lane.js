@@ -107,7 +107,7 @@ class Lane extends Component {
 
   handleCardClick = (e, card) => {
     const {onCardClick} = this.props
-    onCardClick && onCardClick(card.id, card.metadata, card.laneId)
+    onCardClick && onCardClick(card.id, card.metadata)
     e.stopPropagation()
   }
 
