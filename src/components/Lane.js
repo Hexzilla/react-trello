@@ -21,7 +21,8 @@ class Lane extends Component {
     loading: false,
     currentPage: this.props.currentPage,
     cards: this.props.cards,
-    placeholderIndex: -1
+    placeholderIndex: -1,
+    shouldUpdate: true
   }
 
   handleScroll = evt => {
@@ -94,7 +95,7 @@ class Lane extends Component {
   }
 
   moveCardAcrossLanes = (fromLaneId, toLaneId, cardId) => {
-    toLaneId && this.props.actions.moveCardAcrossLanes({fromLaneId: fromLaneId, toLaneId: toLaneId, cardId: cardId})
+    this.props.actions.moveCardAcrossLanes({fromLaneId: fromLaneId, toLaneId: toLaneId, cardId: cardId})
   }
 
   removeCard = (laneId, cardId) => {
@@ -207,10 +208,6 @@ Lane.defaultProps = {
 }
 
 const cardTarget = {
-  canDrop (props) {
-    return props.droppable
-  },
-
   drop (props, monitor, component) {
     const {id} = props
     const draggedObj = monitor.getItem()
@@ -229,8 +226,13 @@ const cardTarget = {
     if (id === draggedObj.laneId) {
       return
     }
+
     const placeholderIndex = getPlaceholderIndex(monitor.getClientOffset().y, findDOMNode(component).scrollTop)
-    component.setState({placeholderIndex})
+
+    if (component.state.shouldUpdate) {
+      component.setState({ placeholderIndex: placeholderIndex, shouldUpdate: false })
+      setTimeout(() => component.setState({ shouldUpdate: true }), 50)
+    }
 
     return monitor.isOver()
 
