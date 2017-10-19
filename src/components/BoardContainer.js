@@ -52,7 +52,7 @@ class BoardContainer extends Component {
     return (
       <BoardDiv style={style} {...otherProps}>
         {reducerData.lanes.map(lane => {
-          const {id, ...otherProps} = lane
+          const {id, droppable, ...otherProps} = lane
           const passthroughProps = pick(this.props, [
             'onLaneScroll',
             'onCardClick',
@@ -66,7 +66,7 @@ class BoardContainer extends Component {
             'tagStyle',
             'children'
           ])
-          return <Lane key={`${id}`} id={id} {...otherProps} {...passthroughProps} />
+          return <Lane key={`${id}`} id={id} droppable={droppable === undefined ? true : droppable} {...otherProps} {...passthroughProps} />
         })}
       </BoardDiv>
     )

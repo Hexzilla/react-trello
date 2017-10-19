@@ -35,7 +35,6 @@
       "id": "WIP",
       "title": "Work In Progress (Not Droppable)",
       "label": "10/20",
-      "droppable": false,
       "cards": [
         {
           "id": "Wip1",
