@@ -49,14 +49,7 @@ class BoardContainer extends Component {
     }
   }
 
-  onDragStart = initial => {
-    console.log('onDragStart')
-    console.log(initial)
-  }
-
   onDragEnd = result => {
-    console.log('onDragEnd')
-    console.log(result)
     const {source, destination, draggableId} = result
     destination &&
       this.props.actions.moveCardAcrossLanes({
@@ -90,7 +83,7 @@ class BoardContainer extends Component {
     ])
 
     return (
-      <DragDropContext onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}>
+      <DragDropContext onDragEnd={this.onDragEnd}>
         <BoardDiv style={style} {...otherProps}>
           {reducerData.lanes.map((lane, index) => {
             const {id, droppable, ...otherProps} = lane

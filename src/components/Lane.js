@@ -155,11 +155,6 @@ class Lane extends Component {
     }
   }
 
-  onDragEnd = result => {
-    console.log('onDragEnd')
-    console.log(result)
-  }
-
   renderDragContainer = () => {
     const {laneSortFunction, editable, tagStyle, cardStyle, draggable} = this.props
     const {addCardMode} = this.state
