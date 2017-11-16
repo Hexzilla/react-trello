@@ -31,7 +31,7 @@ class EditableLabel extends React.Component {
 
   getClassName = () => {
     const placeholder = this.state.text === '' ? 'comPlainTextContentEditable--has-placeholder' : ''
-    return `comPlainTextContentEditable ${placeholder}`
+    return `comPlainTextContentEditable ${placeholder} ${this.props.className}`
   }
 
   render() {
@@ -52,11 +52,13 @@ class EditableLabel extends React.Component {
 EditableLabel.defaultProps = {
   onChange: () => {},
   placeholder: '',
+  className: '',
   autoFocus: false
 }
 EditableLabel.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  className: PropTypes.string,
   autoFocus: PropTypes.bool
 }
 
