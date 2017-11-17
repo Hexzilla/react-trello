@@ -4,15 +4,9 @@
   "main": "dist/index.js",
   "jsnext:main": "components/index.js",
   "module": "components/index.js",
-  "files": [
-    "src",
-    "dist",
-    "README"
-  ],
+  "files": ["src", "dist", "README"],
   "scripts": {
-    "lint": "eslint src/**",
-    "lintfix": "eslint --fix src/**",
-    "prepublish": "npm run lint && npm run build",
+    "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "storybook": "start-storybook -p 9002",
     "test": "jest",
@@ -22,19 +16,28 @@
     "build": "babel src --out-dir dist --copy-files",
     "docs": "build-storybook -o docs",
     "commit": "git cz",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages",
+    "format": "pretty-quick \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": ""
   },
-  "keywords": [
-    "react",
-    "trello",
-    "board"
-  ],
+  "keywords": ["react", "trello", "board"],
   "author": "reactomoss",
   "license": "MIT",
+  "dependencies": {
+    "immutability-helper": "^2.4.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "react-beautiful-dnd": "^6.0.1",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.2",
+    "redux-logger": "^3.0.6",
+    "styled-components": "^2.1.1",
+    "uuid": "^3.1.0"
+  },
   "devDependencies": {
     "@storybook/addon-info": "^3.2.12",
     "@storybook/addon-options": "^3.2.12",
@@ -87,18 +90,6 @@
     "semantic-release": "^6.3.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"
-  },
-  "dependencies": {
-    "immutability-helper": "^2.4.0",
-    "lodash": "^4.17.4",
-    "prop-types": "^15.6.0",
-    "react-beautiful-dnd": "^4.0.1",
-    "react-redux": "^5.0.3",
-    "redux": "^3.6.0",
-    "redux-actions": "^1.2.2",
-    "redux-logger": "^3.0.6",
-    "styled-components": "^2.1.1",
-    "uuid": "^3.1.0"
   },
   "peerDependencies": {
     "react": ">= 0.14.0 < 17.0.0-0",
