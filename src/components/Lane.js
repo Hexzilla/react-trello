@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import isEqual from 'lodash/isEqual'
-import cloneDeep from 'lodash/cloneDeep'
 import Container from '../dnd/Container'
 import Draggable from '../dnd/Draggable'
 import uuidv1 from 'uuid/v1'
@@ -140,17 +139,13 @@ class Lane extends Component {
     const {handleDragEnd} = this.props
     const {addedIndex, payload} = result
     if (addedIndex != null) {
-      const newCard = {...cloneDeep(payload), laneId}
-      const response = handleDragEnd ? handleDragEnd(payload.id, payload.laneId, laneId, addedIndex, newCard) : true
-      if (response === undefined || !!response) {
-        this.props.actions.moveCardAcrossLanes({
-          fromLaneId: payload.laneId,
-          toLaneId: laneId,
-          cardId: payload.id,
-          index: addedIndex
-        })
-      }
-      return response
+      this.props.actions.moveCardAcrossLanes({
+        fromLaneId: payload.laneId,
+        toLaneId: laneId,
+        cardId: payload.id,
+        index: addedIndex
+      })
+      handleDragEnd && handleDragEnd(payload.id, payload.laneId, laneId, addedIndex, payload)
     }
   }
 
@@ -251,7 +246,7 @@ class Lane extends Component {
     const {loading, isDraggingOver} = this.state
     const {id, onLaneClick, ...otherProps} = this.props
     return (
-      <Section {...otherProps} key={id} onClick={() => onLaneClick && onLaneClick(id)} draggable={false}>
+      <Section {...otherProps} key={id} onClick={() => onLaneClick && onLaneClick(id)} draggable={false} className="react-trello-lane">
         {this.renderHeader()}
         {this.renderDragContainer(isDraggingOver)}
         {loading && <Loader />}
