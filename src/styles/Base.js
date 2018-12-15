@@ -1,6 +1,6 @@
-import styled, {injectGlobal} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
   .comPlainTextContentEditable {
     -webkit-user-modify: read-write-plaintext-only;
   }
@@ -52,7 +52,6 @@ export const Section = styled.section`
 `
 
 export const LaneHeader = styled(Header)`
-	z-index: 1000;
 	padding: 0px 5px;
 	margin-bottom: 0px;
 `
