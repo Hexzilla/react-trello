@@ -29,30 +29,30 @@ const CustomCard = props => {
 }
 
 const customCardData = {
-    lanes: [
+  lanes: [
     {
-        id: 'lane1',
-        title: 'Planned',
-        cards: [
-                {
-                    id: 'Card1',
-                    name: 'John Smith',
-                    subTitle: 'SMS received at 12:13pm today',
-                    body: 'Thanks. Please schedule me for an estimate on Monday.',
-                    metadata: {id: 'Card1'}
-                },
-                {
-                    id: 'Card2',
-                    name: 'Card Weathers',
-                    subTitle: 'Email received at 1:14pm',
-                    body: 'Is the estimate free, and can someone call me soon?',
-                    metadata: {id: 'Card1'}
-                }
-            ]
+      id: 'lane1',
+      title: 'Planned',
+      cards: [
+        {
+          id: 'Card1',
+          name: 'John Smith',
+          subTitle: 'SMS received at 12:13pm today',
+          body: 'Thanks. Please schedule me for an estimate on Monday.',
+          metadata: {id: 'Card1'}
         },
         {
-            id: 'lane2',
-            title: 'Work In Progress',
+          id: 'Card2',
+          name: 'Card Weathers',
+          subTitle: 'Email received at 1:14pm',
+          body: 'Is the estimate free, and can someone call me soon?',
+          metadata: {id: 'Card1'}
+        }
+      ]
+    },
+    {
+      id: 'lane2',
+      title: 'Work In Progress',
       cards: [
         {
           id: 'Card3',
