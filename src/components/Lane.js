@@ -98,11 +98,11 @@ class Lane extends Component {
   }
 
   renderAddCardLink = () => {
-    const {addCardLink} = this.props
+    const {addCardLink, addCardTitle} = this.props
     if (addCardLink) {
       return <span onClick={this.showEditableCard}>{addCardLink}</span>
     } else {
-      return <AddCardLink onClick={this.showEditableCard}>Add Card</AddCardLink>
+      return <AddCardLink onClick={this.showEditableCard}>{addCardTitle}</AddCardLink>
     }
   }
 
@@ -129,7 +129,7 @@ class Lane extends Component {
     return this.props.droppable && sourceContainerOptions.groupName === this.groupName
   }
 
-  get groupName()  {
+  get groupName() {
     const {boardId} = this.props
     return `TrelloBoard${boardId}Lane`
   }
@@ -149,18 +149,7 @@ class Lane extends Component {
   }
 
   renderDragContainer = isDraggingOver => {
-    const {
-      laneSortFunction,
-      editable,
-      hideCardDeleteIcon,
-      tagStyle,
-      cardStyle,
-      draggable,
-      cardDraggable,
-      cards,
-      cardDragClass,
-      id
-    } = this.props
+    const {laneSortFunction, editable, hideCardDeleteIcon, tagStyle, cardStyle, draggable, cardDraggable, cards, cardDragClass, id} = this.props
     const {addCardMode, collapsed} = this.state
 
     const showableCards = collapsed ? [] : cards
@@ -182,15 +171,11 @@ class Lane extends Component {
           {...card}
         />
       )
-      return draggable && cardDraggable ? (
-        <Draggable key={card.id}>{cardToRender}</Draggable>
-      ) : (
-        <span key={card.id}>{cardToRender}</span>
-      )
+      return draggable && cardDraggable ? <Draggable key={card.id}>{cardToRender}</Draggable> : <span key={card.id}>{cardToRender}</span>
     })
 
     return (
-      <ScrollableLane innerRef={this.laneDidMount} isDraggingOver={isDraggingOver}>
+      <ScrollableLane ref={this.laneDidMount} isDraggingOver={isDraggingOver}>
         <Container
           orientation="vertical"
           groupName={this.groupName}
@@ -243,7 +228,7 @@ class Lane extends Component {
 
   render() {
     const {loading, isDraggingOver} = this.state
-    const {id, onLaneClick, ...otherProps} = this.props
+    const {id, onLaneClick, onCardAdd, ...otherProps} = this.props
     return (
       <Section {...otherProps} key={id} onClick={() => onLaneClick && onLaneClick(id)} draggable={false} className="react-trello-lane">
         {this.renderHeader()}
@@ -283,6 +268,7 @@ Lane.propTypes = {
   onLaneClick: PropTypes.func,
   newCardTemplate: PropTypes.node,
   addCardLink: PropTypes.node,
+  addCardTitle: PropTypes.string,
   editable: PropTypes.bool,
   cardDraggable: PropTypes.bool,
   cardDragClass: PropTypes.string
@@ -301,4 +287,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(laneActions, dispatch)
 })
 
-export default connect(null, mapDispatchToProps)(Lane)
+export default connect(
+  null,
+  mapDispatchToProps
+)(Lane)
