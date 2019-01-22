@@ -35,6 +35,7 @@
   "author": "reactomoss",
   "license": "MIT",
   "dependencies": {
+    "@terebentina/react-popover": "^2.0.0",
     "immutability-helper": "^2.8.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
