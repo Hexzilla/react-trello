@@ -68,23 +68,30 @@ Card.defaultProps = {
 }
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  index: PropTypes.number,
-  description: PropTypes.string,
-  label: PropTypes.string,
-  tags: PropTypes.array,
-  laneId: PropTypes.string.isRequired,
-  removeCard: PropTypes.func,
-  onClick: PropTypes.func,
+  showDeleteButton: PropTypes.bool,
   onDelete: PropTypes.func,
-  metadata: PropTypes.object,
-  cardStyle: PropTypes.object,
-  dragStyle: PropTypes.object,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
   tagStyle: PropTypes.object,
-  customCardLayout: PropTypes.bool,
-  customCard: PropTypes.node,
-  editable: PropTypes.bool
+  className: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  description: PropTypes.string,
+  tags: PropTypes.array,
+}
+
+Card.defaultProps = {
+  showDeleteButton: true,
+  onDelete: () => {},
+  onClick: () => {},
+  style: {},
+  tagStyle: {},
+  title: 'no title',
+  description: '',
+  label: '',
+  tags: [],
+  className: ''
 }
 
 export default Card
