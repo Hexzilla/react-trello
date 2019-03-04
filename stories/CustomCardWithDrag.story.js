@@ -1,13 +1,21 @@
 import React, {Component} from 'react'
 import {storiesOf} from '@storybook/react'
 import update from 'immutability-helper'
+
+import {MovableCardWrapper } from 'styles/Base'
 import debug from './helpers/debug'
 
 import Board from '../src'
 
 const CustomCard = props => {
   return (
-    <div style={{backgroundColor: props.cardColor, padding: 6}}>
+    <MovableCardWrapper
+      data-id={props.id}
+      onClick={props.onClick}
+      style={props.style}
+      className={props.className}
+      style={{backgroundColor: props.cardColor, padding: 6}}
+    >
       <header
         style={{
           borderBottom: '1px solid #eee',
@@ -25,7 +33,7 @@ const CustomCard = props => {
           <i>{props.body}</i>
         </div>
       </div>
-    </div>
+    </MovableCardWrapper>
   )
 }
 
@@ -75,10 +83,10 @@ class BoardWithCustomCard extends Component {
     this.setState({draggedData: newData})
   }
 
-  onDragEnd = (cardId, sourceLandId, targetLaneId) => {
+  onDragEnd = (cardId, sourceLandId, targetLaneId, card) => {
     debug('Calling onDragENd')
     const {draggedData} = this.state
-    const laneIndex = draggedData.lanes.findIndex(lane => lane.id === targetLaneId)
+    const laneIndex = draggedData.lanes.findIndex(lane => lane.id === sourceLandId)
     const cardIndex = draggedData.lanes[laneIndex].cards.findIndex(card => card.id === cardId)
     const updatedData = update(draggedData, {lanes: {[laneIndex]: {cards: {[cardIndex]: {cardColor: {$set: '#d0fdd2'}}}}}})
     this.setState({boardData: updatedData})
@@ -90,17 +98,16 @@ class BoardWithCustomCard extends Component {
         tagStyle={{fontSize: '80%'}}
         data={this.state.boardData}
         draggable
-        customCardLayout
         onDataChange={this.updateBoard}
         handleDragEnd={this.onDragEnd}
-        onCardClick={(cardId, metadata) => alert(`Card with id:${cardId} clicked. Has metadata.id: ${metadata.id}`)}>
-        <CustomCard />
-      </Board>
+        onCardClick={(cardId, metadata) => alert(`Card with id:${cardId} clicked. Has metadata.id: ${metadata.id}`)}
+        components={{Card: CustomCard}}
+      />
     )
   }
 }
 
-storiesOf('Custom Templates', module).add(
+storiesOf('Custom Components', module).add(
   'Drag-n-Drop Styling',
   () => {
     return <BoardWithCustomCard />
