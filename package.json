@@ -1,5 +1,6 @@
 {
   "name": "trello-clone",
+  "version": "1.0.0",
   "description": "React components for kanbnan board",
   "main": "dist/index.js",
   "jsnext:main": "components/index.js",
