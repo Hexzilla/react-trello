@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import InlineInput from 'components/widgets/InlineInput'
-import {Title, LaneHeader, RightContent } from 'styles/Base'
+import InlineInput from 'rt/widgets/InlineInput'
+import {Title, LaneHeader, RightContent } from 'rt/styles/Base'
 import LaneMenu from './LaneHeader/LaneMenu'
 
 const LaneHeaderComponent = ({
@@ -9,18 +9,18 @@ const LaneHeaderComponent = ({
 }) => {
 
   return (
-    <LaneHeader onDoubleClick={onDoubleClick}>
+    <LaneHeader onDoubleClick={onDoubleClick} editLaneTitle={editLaneTitle}>
       <Title style={titleStyle}>
       {editLaneTitle ?
-        <InlineInput value={title} border placeholder={t('placeholder.title')} onSave={updateTitle} /> :
+        <InlineInput value={title} border placeholder={t('placeholder.title')} resize='vertical' onSave={updateTitle} /> :
         title
       }
       </Title>
       {label && (
         <RightContent>
           <span style={labelStyle}>{label}</span>
-          </RightContent>
-          )}
+        </RightContent>
+       )}
       {canAddLanes && <LaneMenu t={t} onDelete={onDelete}/>}
     </LaneHeader>
   )
