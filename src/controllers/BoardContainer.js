@@ -112,6 +112,7 @@ class BoardContainer extends Component {
       draggable,
       laneDraggable,
       laneDragClass,
+      laneDropClass,
       style,
       onDataChange,
       onCardAdd,
@@ -143,6 +144,7 @@ class BoardContainer extends Component {
       'onLaneClick',
       'laneSortFunction',
       'draggable',
+      'laneDraggable',
       'cardDraggable',
       'collapsibleLanes',
       'canAddLanes',
@@ -162,7 +164,7 @@ class BoardContainer extends Component {
             orientation="horizontal"
             onDragStart={this.onDragStart}
             dragClass={laneDragClass}
-            dropClass=""
+            dropClass={laneDropClass}
             onDrop={this.onLaneDrop}
             lockAxis="x"
             getChildPayload={index => this.getLaneDetails(index)}
@@ -234,6 +236,7 @@ BoardContainer.propTypes = {
   cardDraggable: PropTypes.bool,
   cardDragClass: PropTypes.string,
   laneDragClass: PropTypes.string,
+  laneDropClass: PropTypes.string,
   onCardMoveAcrossLanes: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
@@ -257,7 +260,8 @@ BoardContainer.defaultProps = {
   laneDraggable: true,
   cardDraggable: true,
   cardDragClass: 'react_trello_dragClass',
-  laneDragClass: 'react_trello_dragLaneClass'
+  laneDragClass: 'react_trello_dragLaneClass',
+  laneDropClass: ''
 }
 
 const mapStateToProps = state => {
