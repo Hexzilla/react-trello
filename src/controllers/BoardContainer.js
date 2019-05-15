@@ -25,7 +25,7 @@ class BoardContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // nextProps.data changes when external Board input props change and nextProps.reducerData changes due to event bus or UI changes
     const {data, reducerData, onDataChange} = this.props
     if (nextProps.reducerData && !isEqual(reducerData, nextProps.reducerData)) {
@@ -63,6 +63,8 @@ class BoardContainer extends Component {
         switch (event.type) {
           case 'ADD_CARD':
             return actions.addCard({laneId: event.laneId, card: event.card})
+          case 'UPDATE_CARD':
+            return actions.updateCard({laneId: event.laneId, card: event.card})
           case 'REMOVE_CARD':
             return actions.removeCard({laneId: event.laneId, cardId: event.cardId})
           case 'REFRESH_BOARD':
