@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import { LaneTitle, NewLaneButtons, Section } from 'rt/styles/Base'
 import { AddButton, CancelButton } from 'rt/styles/Elements'
 import NewLaneTitleEditor from 'rt/widgets/NewLaneTitleEditor'
-import ClickOutside from 'react-click-outside'
+import uuidv1 from 'uuid/v1'
 
 class NewLane extends Component {
   handleSubmit = () => {
-    this.props.onAdd({ title: this.getValue() })
+    this.props.onAdd({ 
+        id: uuidv1(),
+        title: this.getValue() 
+    })
   }
 
   getValue = () => this.refInput.getValue()
@@ -23,7 +26,6 @@ class NewLane extends Component {
   render() {
     const { onCancel, t } = this.props
     return (
-      <ClickOutside onClickOutside={this.onClickOutside}>
         <Section>
           <LaneTitle>
             <NewLaneTitleEditor
@@ -41,7 +43,6 @@ class NewLane extends Component {
             <CancelButton onClick={onCancel}>{t('button.Cancel')}</CancelButton>
           </NewLaneButtons>
         </Section>
-      </ClickOutside>
     )
   }
 }
