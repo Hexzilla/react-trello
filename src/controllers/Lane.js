@@ -31,10 +31,7 @@ class Lane extends Component {
       this.setState({loading: true})
       const nextPage = currentPage + 1
       onLaneScroll(nextPage, this.props.id).then(moreCards => {
-        if (!moreCards || moreCards.length === 0) {
-          // if no cards present, stop retrying until user action
-          node.scrollTop = node.scrollTop - 100
-        } else {
+        if ((moreCards || []).length > 0) {
           this.props.actions.paginateLane({
             laneId: this.props.id,
             newCards: moreCards,
@@ -49,7 +46,7 @@ class Lane extends Component {
   sortCards(cards, sortFunction) {
     if (!cards) return []
     if (!sortFunction) return cards
-    return cards.concat().sort(function(card1, card2) {
+    return cards.concat().sort(function (card1, card2) {
       return sortFunction(card1, card2)
     })
   }
@@ -330,7 +327,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(laneActions, dispatch)
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Lane)
+export default connect(null, mapDispatchToProps)(Lane)
